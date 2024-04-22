@@ -1,0 +1,42 @@
+<h1>投稿一覧</h1>
+
+<!--タグリスト-->
+  <% @tag_list.each do |list|%>
+    <i class="fa-sharp fa-solid fa-tag"></i>
+    <%=link_to list.name,search_tag_path(tag_id: list.id) %>
+    <%="(#{list.posts.count})" %>
+  <% end %>
+
+  <div class="message">
+  <%= flash[:notice] %>
+</div>
+
+<table>
+
+ <thead>
+  <tr>
+    <th><h4><b>Title</b></h4></th>
+    <th><h4>Body</h4></th>
+    <th></th>
+  </tr>
+ </thead>
+
+<tbody>
+
+<% @posts.each do |post| %>
+
+
+  <tr>
+    <td><span>
+    <%= link_to posts_path(post.id) do %>
+    <%= image_tag post.image %>
+    <% end %>
+    </span></td>
+    <td><span><%= post.introduction %></span></td>
+  </tr>
+
+ <% end %>
+
+</tbody>
+
+</table>

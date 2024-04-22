@@ -1,0 +1,18 @@
+<table class="admin_customer_index has_border">
+	<thead>
+		<th>会員ID</th>
+		<th>ニックネーム</th>
+		<th></th>
+	</thead>
+	
+	<tbody>
+		<% @customers.each do |user| %>
+			<tr>
+				<td><%= user.id %></td>
+				<td><%= user.name %></td>
+				<td><%= link_to "詳細", admin_path, class: "btn btn-primary" %></td>
+			</tr>
+		<% end %>
+	</tbody>
+	
+</table>

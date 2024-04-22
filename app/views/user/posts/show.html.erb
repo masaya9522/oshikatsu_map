@@ -1,0 +1,15 @@
+<!-- タグリスト -->
+  
+
+  <p><%= image_tag @post.image %></p>
+
+  <h2>説明</h2>
+  <p><%= @post.introduction %></p>
+  
+  <h2>タグ</h2>
+  <% @post_tags.each do |tag| %>
+  <i class="fa-sharp fa-solid fa-tag"></i>
+    <%= link_to tag.name,search_tag_path(tag_id: tag.id) %>
+  <% end %>
+  
+  <%= link_to "投稿一覧", posts_path, class: 'nav-link text-light' %>
