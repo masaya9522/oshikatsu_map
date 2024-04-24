@@ -13,19 +13,9 @@
 
 <table>
 
- <thead>
-  <tr>
-    <th><h4><b>Title</b></h4></th>
-    <th><h4>Body</h4></th>
-    <th></th>
-  </tr>
- </thead>
-
 <tbody>
 
 <% @posts.each do |post| %>
-
-
   <tr>
     <td><span>
     <%= link_to posts_path(post.id) do %>
@@ -33,10 +23,12 @@
     <% end %>
     </span></td>
     <td><span><%= post.introduction %></span></td>
-  </tr>
-
  <% end %>
 
+ <% @tag_list.each do |tag| %>
+  <td><span><%= tag.name %></span></td>
+  <% end %>
+</tr>
 </tbody>
 
 </table>

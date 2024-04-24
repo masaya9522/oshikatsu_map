@@ -6,3 +6,21 @@
     <%=link_to list.name,search_tag_path(tag_id: list.id) %>
     <%="(#{list.posts.count})" %>
   <% end %>
+  
+<table>
+
+<tbody>
+  
+ <% @posts.each do |post| %>
+  <tr>
+    <td><span>
+    <%= link_to posts_path(post.id) do %>
+    <%= image_tag post.image %>
+    <% end %>
+    </span></td>
+    <td><span><%= post.introduction %></span></td>
+ <% end %>
+ 
+ </table>
+
+</tbody>

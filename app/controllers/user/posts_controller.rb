@@ -3,6 +3,7 @@ class User::PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def new
+    @post = Post.new
   end
 
   def create
@@ -14,7 +15,7 @@ class User::PostsController < ApplicationController
       @post.save_tags(tag_list)
       redirect_to posts_path, notice:'投稿が完了しました'
     else
-      render :new
+      render :index
     end
   end
 
@@ -27,6 +28,7 @@ class User::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:name).join(',')
     @post_tags = @post.tags
+    @post_comment = Post.new
   end
 
   def edit

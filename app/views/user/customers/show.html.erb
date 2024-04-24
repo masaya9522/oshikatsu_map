@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 class="my-5">マイページ</h4>
+        <div class="d-flex align-items-center">
+          
+        </div>
+          <table class="table table-bordered">
+            <tr>
+              <td class="bg-light">ニックネーム</td>
+              <td><%= @customer.name %></td>
+            </tr>
+
+<% @posts.each do |post| %>
+
+        <tr>
+          <td>
+            <%= image_tag post.image %>
+          </td>
+
+          <td>
+          <%= post.introduction %>
+          </td>
+        </tr>
+        
+<% end %>
+
+           
+    </div>
+  </div>
+</div>
