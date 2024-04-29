@@ -2,11 +2,17 @@ class Post < ApplicationRecord
   has_one_attached :image
 
   belongs_to :user
-  belongs_to :customer
+  has_many :post_comments, dependent: :destroy
+  
 
   # タグのリレーションのみ記載
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
+  
+  validates :address, presence: true
+  
+  geocoded_by :address
+  after_validation :geocode
 
 
   def save_tags(tags)

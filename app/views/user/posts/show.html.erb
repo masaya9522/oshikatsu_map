@@ -2,14 +2,36 @@
   
 
   <p><%= image_tag @post.image %></p>
+<p class="card-title">
+  <span><i class="fa-solid fa-location-dot"></i> <%= @post.address %></span>
+</p>
 
   <p><%= @post.introduction %></p>
   
+  <div id="star_<%= @post.id %>"></div>
+<script>
+$(document).on('turbolinks:load', function() {
+  let elem = document.querySelector('#star_<%= @post.id %>');
+  if (elem == null) return;
+  
+  elem.innerHTML = "";
+  let opt = {  
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: "<%= @post.star %>",
+    readOnly: true,
+  };
+  raty(elem, opt);
+});
+</script>
+  
   <% @post_tags.each do |tag| %>
-  <i class="fa-sharp fa-solid fa-tag"></i>
-  タグ　<%= link_to tag.name,search_tag_path(tag_id: tag.id) %>
+  <i class="fa-sharp fa-solid fa-tag"><%= link_to tag.name,search_tag_path(tag_id: tag.id) %></i>
   <% end %>
   
- 
+  <div class="container">
+  <div id="map"></div>
+  </div>
   
-  <p><%= link_to "投稿一覧", posts_path, class: 'nav-link text-light' %></p>
+  <%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>

@@ -13,9 +13,9 @@ class User::PostsController < ApplicationController
     tag_list = params[:post][:tag].split(',')
     if @post.save
       @post.save_tags(tag_list)
-      redirect_to posts_path, notice:'投稿が完了しました'
+      redirect_to posts_index_path, notice:'投稿が完了しました'
     else
-      render :index
+      render :new
     end
   end
 
@@ -26,25 +26,9 @@ class User::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @tag_list = @post.tags.pluck(:name).join(',')
+    @tag_list = @post.tags.pluck(:tag).join(',')
     @post_tags = @post.tags
     @post_comment = Post.new
-  end
-
-  def edit
-    @post = Post.find(params[:id])
-    @tag_list = @post.tags.pluck(:name).join(',')
-  end
-
-  def update
-    @post = Post.find(params[:id])
-    tag_list=params[:post][:name].split(',')
-    if @post.update(post_params)
-      @post.save_tags(tag_list)
-      redirect_to post_path
-    else
-      render :edit
-    end
   end
 
   def search_tag
@@ -57,6 +41,6 @@ class User::PostsController < ApplicationController
 
 private
   def post_params
-    params.require(:post).permit(:image, :introduction)
+    params.require(:post).permit(:image, :introduction, :star, :address)
   end
 end

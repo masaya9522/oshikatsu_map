@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>推し活</title>
+    <title>推し活MAP</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/8a0cd277b8.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body class="d-flex flex-column vh-100">
+
     <header class="sticky-top">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-          <a class="navbar-brand" href="/"><span>推し活</span></a>
+          <a class="navbar-brand" href="/"><span>推し活MAP</span></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -71,12 +73,12 @@
         </div>
       </nav>
     </header>
-    
+
     <% if controller_name != 'sessions' %>
 <div class="search_form pe-3">
   <%= search_form_for @q, url: search_path, class:"row justify-content-end" do |f| %>
   <div class="col-md-4 p-0">
-    <%= f.search_field :name_cont, class:"form-control" %>
+
   </div>
   <div class="col-md-1 p-0">
     <button class="btn btn-outline-success" type="submit">
@@ -87,5 +89,6 @@
 </div>
 <% end %>
     <%= yield %>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-jpostal-ja@2.14.45/jquery.jpostal.min.js"></script>
   </body>
 </html>
