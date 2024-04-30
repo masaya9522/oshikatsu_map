@@ -19,7 +19,9 @@
   <tr>
     <td><span>
     <%= link_to posts_path(post.id) do %>
-    <%= image_tag post.image %>
+    <%= image_tag post.image, width: 110, height: 80, 
+        class: "img-resize, rounded mx-auto d-block", 
+        style: "object-fit: cover;" %>
     <% end %>
     </span></td>
     <td><span><%= post.introduction %></span></td>

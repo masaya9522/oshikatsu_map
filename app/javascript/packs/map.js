@@ -9,13 +9,39 @@ let map;
 
 async function initMap() {
   const { Map } = await google.maps.importLibrary("maps");
+  const {AdvancedMarkerElement} = await google.maps.importLibrary("marker") // 追記
 
   // 地図の中心と倍率は公式から変更しています。
   map = new Map(document.getElementById("map"), {
     center: { lat: 35.681236, lng: 139.767125 }, 
     zoom: 15,
+    mapId: "DEMO_MAP_ID", // 追記
     mapTypeControl: false
   });
+  
+   try {
+    const response = await fetch("/posts/index.json");
+    if (!response.ok) throw new Error('Network response was not ok');
+
+    const { data: { items } } = await response.json();
+    console.log(items);
+    if (!Array.isArray(items)) throw new Error("Posts is not an array");
+
+    items.forEach( post => {
+      const latitude = post.latitude;
+      const longitude = post.longitude;
+      const introduction = post.introduction;
+
+      const marker = new google.maps.marker.AdvancedMarkerElement ({
+        position: { lat: latitude, lng: longitude },
+        map,
+        title: introduction,
+        // 他の任意のオプションもここに追加可能
+      });
+    });
+  } catch (error) {
+    console.error('Error fetching or processing post:', error);
+  }
 }
 
 initMap()

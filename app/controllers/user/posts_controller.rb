@@ -22,6 +22,14 @@ class User::PostsController < ApplicationController
   def index
     @posts = Post.all
     @tag_list = Tag.all
+    respond_to do |format|
+      format.html do
+        @posts = Post.all
+      end
+      format.json do
+        @posts = Post.all
+      end
+    end
   end
 
   def show

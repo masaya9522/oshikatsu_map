@@ -1,7 +1,9 @@
 <!-- タグリスト -->
   
 
-  <p><%= image_tag @post.image %></p>
+  <p><%= image_tag @post.image, width: 110, height: 80, 
+        class: "img-resize, rounded mx-auto d-block", 
+        style: "object-fit: cover;" %></p>
 <p class="card-title">
   <span><i class="fa-solid fa-location-dot"></i> <%= @post.address %></span>
 </p>
@@ -26,12 +28,16 @@ $(document).on('turbolinks:load', function() {
 });
 </script>
   
+  <div class="container">
+  <div id="map"></div>
+  </div>
+  
   <% @post_tags.each do |tag| %>
   <i class="fa-sharp fa-solid fa-tag"><%= link_to tag.name,search_tag_path(tag_id: tag.id) %></i>
   <% end %>
   
-  <div class="container">
-  <div id="map"></div>
-  </div>
+  
+  
+  
   
   <%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
